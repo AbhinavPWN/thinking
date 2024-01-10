@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AttendanceTable from './components/AttendanceTable'
+import AddAttendanceForm from './components/addAttendance';
 
-function App() {
+const App = () => {
+  const [attendanceData, setAttendanceData] = useState([
+    { name: 'Abhinav Karki', attendance: 'Present' },
+    { name: 'Ritesh Rijal', attendance: 'Absent' },
+    { name: 'Jenish Kshteri', attendance: 'Present' },
+    { name: 'Mahesh Dalle', attendance: 'Absent' },
+
+
+    // Initial dummy data, replace with fetched data from the database
+  ]);
+
+  const addAttendance = (newAttendance) => {
+    setAttendanceData([...attendanceData, newAttendance]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Student Attendance System</h1>
+      <AttendanceTable attendanceData={attendanceData} />
+      <AddAttendanceForm addAttendance={addAttendance} />
     </div>
   );
-}
+};
 
 export default App;
